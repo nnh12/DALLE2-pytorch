@@ -641,7 +641,7 @@ def initialize_training(config: TrainDecoderConfig, config_path):
     
 # Create a simple click command line interface to load the config and start the training
 @click.command()
-@click.option("--config_file", default="./train_decoder_config.json", help="Path to config file")
+@click.option("--config_file", default="./configs/train_decoder_config.example.json", help="Path to config file")
 def main(config_file):
     config_file_path = Path(config_file)
     config = TrainDecoderConfig.from_json_path(str(config_file_path))
