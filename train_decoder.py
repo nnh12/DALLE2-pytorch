@@ -547,7 +547,7 @@ def create_tracker(accelerator: Accelerator, config: TrainDecoderConfig, config_
     }
     accelerator.wait_for_everyone()  # If nodes arrive at this point at different times they might try to autoresume the current run which makes no sense and will cause errors
     tracker: Tracker = tracker_config.create(config, accelerator_config, dummy_mode=dummy)
-    tracker.save_config(config_path, config_name='decoder_config.json')
+    tracker.save_config(config_path, config_name='./configs/train_decoder_config.example.json')
     tracker.add_save_metadata(state_dict_key='config', metadata=config.model_dump())
     return tracker
     
@@ -641,7 +641,7 @@ def initialize_training(config: TrainDecoderConfig, config_path):
     
 # Create a simple click command line interface to load the config and start the training
 @click.command()
-@click.option("--config_file", default="./train_decoder_config.json", help="Path to config file")
+@click.option("--config_file", default="./configs/train_decoder_config.example.json", help="Path to config file")
 def main(config_file):
     config_file_path = Path(config_file)
     config = TrainDecoderConfig.from_json_path(str(config_file_path))
